@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte'
   import { supabase } from './supabase.js'
+  import { currentRoute } from './router.js'
 
   let pipelineHealthPct = null
 
@@ -23,11 +24,11 @@
   }
 
   const navTabs = [
-    { label: 'Overview & Pipeline', active: true },
-    { label: 'Villa Directory', active: false },
-    { label: 'Staff Performance', active: false },
-    { label: 'Geographic Density', active: false },
-    { label: 'Settings', active: false },
+    { label: 'Overview & Pipeline', path: '/overview' },
+    { label: 'Villa Directory', path: '/villa-directory' },
+    { label: 'Staff Performance', path: '/staff-performance' },
+    { label: 'Geographic Density', path: '/geographic-density' },
+    { label: 'Settings', path: '/settings' },
   ]
 </script>
 
@@ -76,15 +77,15 @@
   <div class="h-12 w-full px-gutter-desktop bg-surface-container-low/70 flex items-center justify-between gap-space-md overflow-x-auto">
     <nav class="flex items-center gap-space-xs h-full py-space-2xs">
       {#each navTabs as tab}
-        {#if tab.active}
-          <span class="px-space-md py-space-xs rounded font-body-compact text-body-compact text-on-surface bg-surface-container-lowest font-semibold shadow-[0_1px_4px_rgba(0,0,0,0.04)] whitespace-nowrap">
-            {tab.label}
-          </span>
-        {:else}
-          <span class="px-space-md py-space-xs rounded font-body-compact text-body-compact text-outline/50 whitespace-nowrap cursor-not-allowed" title="Not built yet">
-            {tab.label}
-          </span>
-        {/if}
+        
+          href="#{tab.path}"
+          class="px-space-md py-space-xs rounded font-body-compact text-body-compact whitespace-nowrap transition-colors
+            {$currentRoute === tab.path
+              ? 'text-on-surface bg-surface-container-lowest font-semibold shadow-[0_1px_4px_rgba(0,0,0,0.04)]'
+              : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface'}"
+        >
+          {tab.label}
+        </a>
       {/each}
     </nav>
     {#if pipelineHealthPct !== null}
