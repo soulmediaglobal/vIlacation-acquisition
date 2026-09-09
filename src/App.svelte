@@ -1,9 +1,12 @@
-<main class="min-h-screen bg-background p-space-2xl">
+<script>
+  import InsightStrip from './lib/InsightStrip.svelte'
+  import KpiScorecards from './lib/KpiScorecards.svelte'
+</script>
+
+<main class="min-h-screen bg-background p-space-2xl flex flex-col gap-space-lg">
   <h1 class="font-headline-lg text-headline-lg text-on-surface">
-    Tailwind test
+    Akuisisi Villa
   </h1>
-  <div class="mt-space-lg inline-flex items-center gap-space-sm px-space-lg py-space-sm bg-primary text-on-primary rounded-lg font-body-compact-medium text-body-compact-medium">
-    <span class="material-symbols-outlined text-[18px]">check_circle</span>
-    If this is teal with rounded corners, Tailwind is working
-  </div>
+  <InsightStrip />
+  <KpiScorecards />
 </main>
